@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:fashionnn/screens/cart.dart';
 import 'package:fashionnn/screens/home.dart';
 import 'package:fashionnn/screens/search.dart';
 import 'package:fashionnn/utils/constants.dart';
@@ -32,8 +33,8 @@ class _MainWrapperState extends State<MainWrapper> {
                 child: Text(
                   'Search',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
@@ -43,8 +44,8 @@ class _MainWrapperState extends State<MainWrapper> {
                 child: Text(
                   'Home',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
@@ -69,7 +70,14 @@ class _MainWrapperState extends State<MainWrapper> {
                   ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Cart(),
+                ),
+              );
+            },
             icon: Icon(
               Icons.shopping_bag_outlined,
               color: Colors.black,
@@ -79,7 +87,7 @@ class _MainWrapperState extends State<MainWrapper> {
         ],
       ),
 
-      // when press the serach button, 
+      // when press the search button,
       // it will directly switch to another page
       body: isSeacrhActive ? Search() : Home(),
       bottomNavigationBar: BottomBarDoubleBullet(

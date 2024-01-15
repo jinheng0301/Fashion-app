@@ -1,6 +1,7 @@
 import 'package:fashionnn/data/app_data.dart';
 import 'package:fashionnn/model/base_model.dart';
 import 'package:fashionnn/model/categories_model.dart';
+import 'package:fashionnn/screens/details.dart';
 import 'package:fashionnn/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
@@ -140,7 +141,20 @@ class _HomeState extends State<Home> {
                     physics: BouncingScrollPhysics(),
                     itemCount: mainList.length,
                     itemBuilder: (context, index) {
-                      return view(index, theme, size);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Details(
+                                data: mainList[index],
+                                isCameFromMostPopularPart: false,
+                              ),
+                            ),
+                          );
+                        },
+                        child: view(index, theme, size),
+                      );
                     },
                   ),
                 ),
@@ -185,54 +199,67 @@ class _HomeState extends State<Home> {
                       BaseModel current = mainList[index];
 
                       return GestureDetector(
-                        onTap: () {},
-                        child: Column(
-                          children: [
-                            Container(
-                              width: size.width * 0.5,
-                              height: size.height * 0.3,
-                              margin: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                image: DecorationImage(
-                                  image: AssetImage(current.imageUrl),
-                                  fit: BoxFit.cover,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 4),
-                                    blurRadius: 4,
-                                    color: Color.fromARGB(61, 0, 0, 0),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Details(
+                                data: mainList[index],
+                                isCameFromMostPopularPart: true,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Hero(
+                          tag: current.imageUrl,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: size.width * 0.5,
+                                height: size.height * 0.3,
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  image: DecorationImage(
+                                    image: AssetImage(current.imageUrl),
+                                    fit: BoxFit.cover,
                                   ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 2),
-                              child: Text(
-                                current.name,
-                                style: theme.displayMedium,
-                              ),
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                text: 'RM',
-                                style: theme.titleSmall?.copyWith(
-                                  color: primaryColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: ' ${current.price.toString()}',
-                                    style: theme.titleSmall?.copyWith(
-                                      fontWeight: FontWeight.bold,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0, 4),
+                                      blurRadius: 4,
+                                      color: Color.fromARGB(61, 0, 0, 0),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsets.only(top: 2),
+                                child: Text(
+                                  current.name,
+                                  style: theme.displayMedium,
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: 'RM',
+                                  style: theme.titleSmall?.copyWith(
+                                    color: primaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: ' ${current.price.toString()}',
+                                      style: theme.titleSmall?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -271,22 +298,25 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           // IMAGE
-          Container(
-            width: size.width * 0.6,
-            height: size.height * 0.35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(3),
-              image: DecorationImage(
-                image: AssetImage(data.imageUrl),
-                fit: BoxFit.cover,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 4),
-                  blurRadius: 4,
-                  color: Color.fromARGB(61, 0, 0, 0),
+          Hero(
+            tag: data.id,
+            child: Container(
+              width: size.width * 0.6,
+              height: size.height * 0.35,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3),
+                image: DecorationImage(
+                  image: AssetImage(data.imageUrl),
+                  fit: BoxFit.cover,
                 ),
-              ],
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 4),
+                    blurRadius: 4,
+                    color: Color.fromARGB(61, 0, 0, 0),
+                  ),
+                ],
+              ),
             ),
           ),
 
@@ -302,7 +332,7 @@ class _HomeState extends State<Home> {
           // PRICE
           RichText(
             text: TextSpan(
-              text: 'RM',
+              text: 'USD',
               style: theme.titleSmall?.copyWith(
                 color: primaryColor,
                 fontSize: 26,
