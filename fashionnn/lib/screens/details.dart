@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:fashionnn/methods/add_to_cart.dart';
 import 'package:fashionnn/model/base_model.dart';
 import 'package:fashionnn/utils/constants.dart';
 import 'package:fashionnn/widgets/reusable_button.dart';
@@ -289,7 +290,7 @@ class _DetailsState extends State<Details> {
                 padding: EdgeInsets.only(top: size.height * 0.03),
                 child: ReusableButton(
                   onTap: () {
-                    print('add to cart');
+                    AddToCart.addToCart(current, context);
                   },
                   text: 'Add to cart',
                 ),

@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:fashionnn/data/app_data.dart';
+import 'package:fashionnn/methods/add_to_cart.dart';
 import 'package:fashionnn/model/base_model.dart';
 import 'package:fashionnn/screens/details.dart';
 import 'package:fashionnn/utils/constants.dart';
@@ -198,7 +199,7 @@ class _SearchState extends State<Search> {
                                       backgroundColor: primaryColor,
                                       child: IconButton(
                                         onPressed: () {
-                                          print('add to cart now');
+                                          AddToCart.addToCart(current, context);
                                         },
                                         icon: Icon(
                                           LineIcons.shoppingCart,
