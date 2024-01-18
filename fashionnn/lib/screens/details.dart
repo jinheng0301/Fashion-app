@@ -22,6 +22,16 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   int selectedSize = 3;
   int selectedColor = 2;
+  bool isLikedItem = false;
+  String message = '';
+
+  showSnackBar(String content, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +53,34 @@ class _DetailsState extends State<Details> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.favorite_outline),
-            color: Colors.white,
+            onPressed: () {
+              setState(() {
+                // the isLikedItem state is toggled when the like button is pressed again.
+                // If isLikedItem is true, it will display a red-filled heart (like).
+                // If isLikedItem is false, it will display a heart outline (not liked).
+                isLikedItem = !isLikedItem; // toggle the state of like button
+              });
+
+              // Update the value of res based on the action
+              message = isLikedItem ? 'Success' : 'cancelLike';
+
+              // Show the appropriate snack bar message
+              if (message == 'Success') {
+                message = 'Added your like item in the like colection.';
+                showSnackBar(message, context);
+              } else if (message == 'cancelLike') {
+                message = 'Removed your item from like collection.';
+                showSnackBar(message, context);
+              }
+            },
+            icon: isLikedItem
+                ? Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  )
+                : Icon(
+                    Icons.favorite_border,
+                  ),
           ),
         ],
       ),

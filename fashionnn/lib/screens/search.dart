@@ -140,7 +140,7 @@ class _SearchState extends State<Search> {
                                       tag: current.imageUrl,
                                       child: Container(
                                         width: size.width * 0.5,
-                                        height: size.height * 0.3,
+                                        height: size.height * 0.25,
                                         margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           borderRadius:

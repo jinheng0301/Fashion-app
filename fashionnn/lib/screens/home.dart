@@ -216,7 +216,7 @@ class _HomeState extends State<Home> {
                             children: [
                               Container(
                                 width: size.width * 0.5,
-                                height: size.height * 0.3,
+                                height: size.height * 0.25,
                                 margin: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(3),

@@ -60,8 +60,8 @@ class _CartState extends State<Cart> {
   }
 
   // CALCULATE SUBTOTAL
-  int calculateSubTotal() {
-    int subTotal = 0;
+  double calculateSubTotal() {
+    double subTotal = 0;
 
     if (itemsOnCart.isNotEmpty) {
       subTotal = 0;
@@ -393,7 +393,7 @@ class _CartState extends State<Cart> {
                         delay: Duration(milliseconds: 400),
                         child: ReusableRowForCart(
                           text: 'Sub Total: ',
-                          price: calculateSubTotal().toDouble(),
+                          price: calculateSubTotal(),
                         ),
                       ),
                       FadeInUp(
