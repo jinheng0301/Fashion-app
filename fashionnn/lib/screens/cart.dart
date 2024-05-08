@@ -17,14 +17,25 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   // delete current selected item from list
+
+  // The error indicates that you're trying to access a widget that has been deactivated,
+  // typically due to it being disposed of.
+  // This usually happens when you try to access the state of a widget after it's been removed from the widget tree.
   void onDelete(BaseModel data) {
     setState(() {
-      if (itemsOnCart.length == 1) {
-        itemsOnCart.clear();
-      } else {
-        itemsOnCart.removeWhere(
-          (element) => element.id == data.id,
-        );
+      if (mounted) {
+        // Perform some action only if the widget is still mounted
+        // "mounted" refers to whether a stateful widget is currently included in the widget tree and has been fully initialized.
+        // The mounted property is a boolean value (true or false) available in the State class.
+        // It indicates whether the associated state object is currently mounted in the widget tree.
+        // It's often used to check whether a widget is still active and can safely be updated.
+        if (itemsOnCart.length == 1) {
+          itemsOnCart.clear();
+        } else {
+          itemsOnCart.removeWhere(
+            (element) => element.id == data.id,
+          );
+        }
       }
     });
   }
